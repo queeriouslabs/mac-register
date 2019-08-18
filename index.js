@@ -16,14 +16,13 @@ app.post("/register", (req, res) => {
 	const { msg } = req.body;
     const { remoteAddress: ip } = req.connection;
 
-	exec(`arp -a ${ip}`, (err, stdout_, stderr) => {
-		const stdout = stdout_.toString();
-		const mac = stdout.split(" ")[3];
-
-		if (err != null) {
+	exec(`nmap -sn ${ip} | grep "MAC Address" | sed "s/MAC Address\: //"`, (err, stdout_, stderr) => {
+        if (err != null) {
 			console.error(err);
 			return res.status(500).send("Something went wrong.");
 		}
+
+		const [ mac ] = stdout_.toString().split(" ");
 
 		res.send(`Registered message ${msg} for mac address ${mac}`);
 	});
