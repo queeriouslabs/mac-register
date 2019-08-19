@@ -1,0 +1,11 @@
+[Unit]
+Description=A server to add people to the welcome service
+
+[Service]
+WorkingDirectory=/home/pi/Projects/mac-addr/
+User=root
+Type=simple
+ExecStart=/usr/bin/node index.js
+
+[Instal]
+WantedBy=multi-user.target
