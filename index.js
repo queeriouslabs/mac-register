@@ -40,6 +40,7 @@ app.post("/register", (req, res) => {
                 console.log(err);
                 return res.status(500).send("Something went wrong.");
             }
+            exec(`systemctl restart welcome`);
 
             res.send(`Registered message ${msg} for mac address ${mac}`);
         });
