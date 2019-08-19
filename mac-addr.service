@@ -7,5 +7,5 @@ User=root
 Type=simple
 ExecStart=/usr/bin/node index.js
 
-[Instal]
+[Install]
 WantedBy=multi-user.target
